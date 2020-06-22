@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import org.w3c.dom.Text
 
 class AdaptadorCustom( var contexto: Context, items:ArrayList<Contacto>):BaseAdapter() {
 
@@ -34,7 +33,7 @@ class AdaptadorCustom( var contexto: Context, items:ArrayList<Contacto>):BaseAda
         val item = getItem(p0) as Contacto
 
         // Asiganción de valores a elementos gráficos
-        viewHolder?.nombre?.text = item.nombre
+        viewHolder?.nombre?.text = item.nombre + " " + item.apellidos
         viewHolder?.empresa?.text = item.empresa
         viewHolder?.foto?.setImageResource(item.foto)
 
