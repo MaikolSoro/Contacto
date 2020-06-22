@@ -9,7 +9,16 @@ import android.widget.ListView
 import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
-    var contactos:ArrayList<Contacto>? = null
+
+    var lista:ListView? = null
+    var adaptador: AdaptadorCustom? = null
+    companion object {
+        var contactos: ArrayList<Contacto>? = null
+        fun agregarContacto(contacto:Contacto) {
+            contactos?.add(contacto);
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         contactos = ArrayList()
         contactos?.add(Contacto("Maikol", "Soro", "Avantica", 21, 50.0F, "Santa Rita", "86223186", "maikolsoro.z1998@gmail.com", R.drawable.foto_01))
 
-        val lista = findViewById<ListView>(R.id.lista)
-        val adaptador = AdaptadorCustom( this,contactos!!)
+         lista = findViewById<ListView>(R.id.lista)
+         adaptador = AdaptadorCustom( this,contactos!!)
 
-        lista.adapter = adaptador
+        lista?.adapter = adaptador
         }
 
 
@@ -43,6 +52,11 @@ class MainActivity : AppCompatActivity() {
             else ->{  return super.onOptionsItemSelected(item)}
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adaptador?.notifyDataSetChanged()
     }
 
 }
