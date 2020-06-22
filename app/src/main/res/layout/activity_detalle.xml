@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/foto_03" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Carlos Avila"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.066" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvEmpresa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -46,114 +46,134 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombre"
         app:layout_constraintVertical_bias="0.076" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Edad"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.375"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/titulo_edad"
+        app:layout_constraintEnd_toStartOf="@+id/tvPeso"
+        app:layout_constraintHorizontal_bias="0.351"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="429dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmpresa"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peso"
-        tools:layout_editor_absoluteX="208dp"
-        tools:layout_editor_absoluteY="429dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/titulo_peso"
+        app:layout_constraintEnd_toStartOf="@+id/textView18"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmpresa"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Telefono"
+        android:text="@string/titulo_telefono"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.689"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        tools:layout_editor_absoluteY="429dp"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toEndOf="@+id/tvPeso"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmpresa"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tvEdad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:text="34 años"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintEnd_toStartOf="@+id/tvPeso"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmpresa" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvPeso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="100dp"
         android:text="66k"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
-        tools:layout_editor_absoluteY="483dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toStartOf="@+id/tvTelefono"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="471dp" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="60dp"
         android:text="86223186"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="483dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="471dp" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/titulo_email"
+        app:layout_constraintEnd_toStartOf="@+id/textView19"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdad"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/titulo_dirreccion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTelefono"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="557dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvDirreccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Direccion"
-        tools:layout_editor_absoluteX="348dp"
-        tools:layout_editor_absoluteY="557dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="maikolsoro.z1998@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="605dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintVertical_bias="0.078"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tvDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Santa Rita"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:layout_editor_absoluteX="348dp"
-        tools:layout_editor_absoluteY="605dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
+        app:layout_constraintVertical_bias="0.174"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
