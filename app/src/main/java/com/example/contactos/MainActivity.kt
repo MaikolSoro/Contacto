@@ -7,13 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ListView
-import android.widget.SearchView
+import android.view.ViewStructure
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
     var lista:ListView? = null
+
+    var viewSwitcher:ViewSwitcher? = null
 
     companion object {
 
@@ -46,8 +48,10 @@ class MainActivity : AppCompatActivity() {
         contactos = ArrayList()
         contactos?.add(Contacto("Maikol", "Soro", "Avantica", 21, 50.0F, "Santa Rita", "86223186", "maikolsoro.z1998@gmail.com", R.drawable.foto_01))
 
+
          lista = findViewById<ListView>(R.id.lista)
          adaptador = AdaptadorCustom( this,contactos!!)
+         viewSwitcher = findViewById(R.id.viewSwitcher)
 
         lista?.adapter = adaptador
 
@@ -65,6 +69,11 @@ class MainActivity : AppCompatActivity() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val itemBusqueda = menu?.findItem(R.id.searchView)
         val searchView = itemBusqueda?.actionView as SearchView
+
+        val itemSwitch = menu?.findItem(R.id.switchView)
+        itemSwitch?.setActionView(R.layout.switch_item)
+
+        val switchView = itemSwitch?.actionView?.findViewById<Switch>(R.id.sCambiaVista)
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = "BuscarContacto..."
@@ -85,6 +94,11 @@ class MainActivity : AppCompatActivity() {
                 return  true
             }
         })
+
+        switchView?.setOnCheckedChangeListener { buttonView, isChecked->
+            viewSwitcher?.showNext()
+
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
