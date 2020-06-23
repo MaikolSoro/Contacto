@@ -14,13 +14,14 @@ import androidx.appcompat.widget.Toolbar
 class MainActivity : AppCompatActivity() {
 
     var lista:ListView? = null
-
+    var grid:GridView? = null
     var viewSwitcher:ViewSwitcher? = null
 
     companion object {
 
         var contactos: ArrayList<Contacto>? = null
         var adaptador: AdaptadorCustom? = null
+        var adaptadorGrid: AdaptadorCustomGrid? = null
         fun agregarContacto(contacto:Contacto) {
            adaptador?.addItem(contacto)
         }
@@ -50,10 +51,13 @@ class MainActivity : AppCompatActivity() {
 
 
          lista = findViewById<ListView>(R.id.lista)
+         grid = findViewById<GridView>(R.id.grid)
          adaptador = AdaptadorCustom( this,contactos!!)
+        adaptadorGrid = AdaptadorCustomGrid(this, contactos!!)
          viewSwitcher = findViewById(R.id.viewSwitcher)
 
         lista?.adapter = adaptador
+        grid?.adapter = adaptadorGrid
 
         lista?.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent( this, Detalle::class.java)
