@@ -1,33 +1,38 @@
 package com.example.contactos
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
+import android.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
     var lista:ListView? = null
-    var adaptador: AdaptadorCustom? = null
+
     companion object {
+
         var contactos: ArrayList<Contacto>? = null
+        var adaptador: AdaptadorCustom? = null
         fun agregarContacto(contacto:Contacto) {
-            contactos?.add(contacto);
+           adaptador?.addItem(contacto)
         }
 
         fun obtenerContacto(index:Int): Contacto{
-            return contactos?.get(index)!!
+            return adaptador?.getItem(index) as Contacto
         }
 
         fun eliminarContacto(index: Int) {
-                contactos?.removeAt(index)
+            adaptador?.removeItem(index)
         }
 
         fun actualizarContacto(index: Int, nuevoContacto:Contacto) {
-            contactos?.set(index, nuevoContacto)
+            adaptador?.updateItemn(index, nuevoContacto)
         }
 
     }
@@ -57,6 +62,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val itemBusqueda = menu?.findItem(R.id.searchView)
+        val searchView = itemBusqueda?.actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.queryHint = "BuscarContacto..."
+
+        searchView.setOnQueryTextFocusChangeListener {v, hasFocus ->
+            // preparar los datos
+        }
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(p0: String?): Boolean {
+                // filtrar
+                adaptador?.filtrar(p0!!)
+                return true
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+
+                // filtrar
+                return  true
+            }
+        })
         return super.onCreateOptionsMenu(menu)
     }
 

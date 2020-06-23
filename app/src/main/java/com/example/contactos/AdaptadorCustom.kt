@@ -13,9 +13,11 @@ class AdaptadorCustom( var contexto: Context, items:ArrayList<Contacto>):BaseAda
     // Almacenar los elementos que se van en el ListView
 
     var items: ArrayList<Contacto>? = null
+    var copiaItems: ArrayList<Contacto>?= null
 
     init {
-        this.items = items
+        this.items = ArrayList(items)
+        this.copiaItems = items;
     }
     //Asociar el rendirisado de los elementos
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -54,6 +56,56 @@ class AdaptadorCustom( var contexto: Context, items:ArrayList<Contacto>):BaseAda
         return this.items?.count()!!
     }
 
+    // agregar los items de nuevo contacto
+    fun addItem(item:Contacto) {
+        copiaItems?.add(item)
+        items = ArrayList(copiaItems)
+        notifyDataSetChanged()
+    }
+
+    // delete the item
+    fun removeItem(index: Int) {
+        copiaItems?.removeAt(index)
+        items = ArrayList(copiaItems)
+        notifyDataSetChanged()
+    }
+
+    //update the item
+
+    fun updateItemn(index: Int, newItem:Contacto) {
+        copiaItems?.set(index, newItem)
+        items = ArrayList(copiaItems)
+        notifyDataSetChanged()
+    }
+
+
+    // EL filtro para buscar
+    fun filtrar(str:String) {
+        items?.clear()
+
+        if(str.isEmpty()){
+            items = ArrayList(copiaItems)
+            notifyDataSetChanged()
+            return
+        }
+
+        var busqueda = str
+        busqueda = busqueda.toLowerCase()
+
+        for( item in copiaItems!!){
+
+            val nombre = item.nombre.toLowerCase()
+
+            if(nombre.contains(busqueda)){
+                items?.add(item)
+
+            }
+        }
+
+        notifyDataSetChanged()
+    }
+
+
     private  class  ViewHolder(vista:View) {
         var nombre:TextView? = null
         var foto: ImageView? = null
@@ -65,6 +117,8 @@ class AdaptadorCustom( var contexto: Context, items:ArrayList<Contacto>):BaseAda
             foto = vista.findViewById(R.id.ivFoto)
         }
     }
+
+
 
 
 }
