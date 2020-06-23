@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 
@@ -18,6 +15,8 @@ class Nuevo : AppCompatActivity() {
     var fotoIndex:Int = 0
     val fotos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03, R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
     var foto:ImageView? = null
+    var index:Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -35,6 +34,13 @@ class Nuevo : AppCompatActivity() {
         foto?.setOnClickListener {
             seleccionarFoto()
         }
+
+        // reconocer acción de nuevo vs editar
+        if( intent.hasExtra("ID")){
+            index = intent.getStringExtra("ID")!!.toInt()
+            rellenarDatos(index)
+        }
+
     }
         override fun onCreateOptionsMenu(menu: Menu?): Boolean {
             menuInflater.inflate(R.menu.menu_nuevo, menu)
@@ -79,9 +85,15 @@ class Nuevo : AppCompatActivity() {
                     if(flag > 0){
                         Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show()
                     } else {
-                        MainActivity.agregarContacto(Contacto(campos.get(0), campos.get(1), campos.get(2),campos.get(3).toInt(),campos.get(4).toFloat(),campos.get(5), campos.get(6),campos.get(7),obtenerFoto(fotoIndex)))
-                        finish()
-                        Log.d("No ELEMENTOS", MainActivity.contactos?.count().toString())
+                        if(index >  -1){
+                            MainActivity.actualizarContacto(index, Contacto(campos.get(0), campos.get(1), campos.get(2),campos.get(3).toInt(),campos.get(4).toFloat(),campos.get(5), campos.get(6),campos.get(7),obtenerFoto(fotoIndex)))
+
+                        } else {
+                            MainActivity.agregarContacto(Contacto(campos.get(0), campos.get(1), campos.get(2),campos.get(3).toInt(),campos.get(4).toFloat(),campos.get(5), campos.get(6),campos.get(7),obtenerFoto(fotoIndex)))
+                            finish()
+                            //Log.d("No ELEMENTOS", MainActivity.contactos?.count().toString())
+                        }
+
                     }
 
                     return true
@@ -116,5 +128,39 @@ class Nuevo : AppCompatActivity() {
 
         fun obtenerFoto(index: Int ): Int{
            return fotos.get(index)
+        }
+
+        fun rellenarDatos(index: Int) {
+            val contacto = MainActivity.obtenerContacto(index)
+
+            val tvNombre = findViewById<EditText>(R.id.tvNombre)
+            val tvApellidos = findViewById<EditText>(R.id.tvApellidos)
+            val tvEmpresa = findViewById<EditText>(R.id.tvEmpresa)
+            val tvEdad  = findViewById<EditText>(R.id.tvEdad)
+            val tvPeso = findViewById<EditText>(R.id.tvPeso)
+            val tvDireccion = findViewById<EditText>(R.id.tvDireccion)
+            val tvTelefono = findViewById<EditText>(R.id.tvTelefono)
+            val tvEmail  = findViewById<EditText>(R.id.tvEmail)
+            val ivFoto = findViewById<ImageView>(R.id.ivFoto)
+
+            tvNombre.setText(contacto.nombre , TextView.BufferType.EDITABLE)
+            tvApellidos.setText(contacto.apellidos , TextView.BufferType.EDITABLE)
+            tvEmpresa.setText(contacto.empresa, TextView.BufferType.EDITABLE)
+            tvEdad.setText(contacto.edad.toString() ,  TextView.BufferType.EDITABLE)
+            tvPeso.setText(contacto.peso.toString() ,  TextView.BufferType.EDITABLE)
+            tvDireccion.setText(contacto.direccion,  TextView.BufferType.EDITABLE)
+            tvTelefono.setText( contacto.telefono,  TextView.BufferType.EDITABLE)
+            tvEmail.setText(contacto.email,  TextView.BufferType.EDITABLE)
+            ivFoto.setImageResource(contacto.foto)
+
+            var posicion = 0
+            for (foto in fotos){
+                if(contacto.foto == foto){
+                    fotoIndex = posicion
+
+                }
+                posicion++
+            }
+
         }
     }
